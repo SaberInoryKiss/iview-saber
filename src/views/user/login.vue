@@ -1,0 +1,73 @@
+<style lang="less">
+@import "./login.less";
+</style>
+
+<template>
+	<div class="login">
+		<div class="login-con">	
+			<Card icon="log-in" title="欢迎登录" :bordered="false">	
+				<div class="form-con">	
+					<login-form @on-success-valid="handleSubmit"></login-form>	
+					<p class="login-tip">用户名：admin 密码：admin</p>	
+				</div>	
+			</Card>	
+		</div>	
+	</div>
+</template>
+
+<script>
+import LoginForm from "@/components/login-form";
+import mockData from "@/mock/index.js";
+import { mapMutations } from "vuex"
+// import util from "@/util";
+export default {
+	components: {
+		LoginForm
+	},
+	// computed: {
+	// 	...mapState(["loginUserName"])
+	// },
+	methods: {
+
+		...mapMutations(["setLoginUserName","setLoginUserpwd"]),
+		handleSubmit({ userName, password }) {
+			let data = {
+				username: userName,
+				password: password
+			};
+			this.$axios
+				.post("/login", data)
+				.then(res => {
+					console.log(res)
+					if (res.status == 200) {
+						this.$Notice.success({
+							title: "登录成功！"
+						});
+						this.setLoginUserName(userName)
+						this.setLoginUserpwd(password)
+						// util.storage.set(this.$config.KEY.CACHE_LOGIN_USER_NAME, userName);
+						// util.storage.set(this.$config.KEY.CACHE_LOGIN_PASS_PWD, password);
+						setTimeout(() => {
+							this.$router.push("/");
+						}, 300);
+					} else {
+						this.$Notice.error({
+							title: "登录失败！",
+							desc: "请输入正确的用户名和密码（用户名：admin，密码：admin） "
+						});
+					}
+				})
+				.catch(err => {
+					this.$Notice.error({
+						title: "登录失败！",
+						desc: "请输入正确的用户名和密码（用户名：admin，密码：admin） "
+					});
+				});
+		}
+	}
+};
+</script>
+
+<style>
+
+</style>
