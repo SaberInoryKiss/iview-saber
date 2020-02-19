@@ -46,4 +46,5 @@ npm run build
 - [G2 可视化引擎](https://antv-g2.gitee.io/zh/) 
 
 
-
+## License
+[MIT License](https://github.com/SaberInoryKiss/iview-saber/blob/master/LICENSE) 
