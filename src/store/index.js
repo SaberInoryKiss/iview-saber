@@ -18,7 +18,6 @@ const store = new Vuex.Store({
     },
     mutations: {
         setLoginUserName(state,val){
-            console.log(val)
             state.loginUserName = val
             state.loginUserName = util.storage.set(config.KEY.CACHE_LOGIN_USER_NAME,val)
         },

@@ -6,7 +6,6 @@ Mock.setup({
     timeout : "100-330"
 })
 
-// console.log(user)
 
 
 export default Mock

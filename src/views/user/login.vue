@@ -38,8 +38,7 @@ export default {
 			this.$axios
 				.post("/login", data)
 				.then(res => {
-					console.log(res)
-					if (res.status == 200) {
+					if (res.data.success == true) {
 						this.$Notice.success({
 							title: "登录成功！"
 						});
