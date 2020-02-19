@@ -6,7 +6,7 @@
  * @LastEditors: 夏开尧
  * @UpdateLogs: logs
  -->
-# iview G6
+# iview-saber
 
 >在每一次艰难的旅途中，别人给予我的帮助就像沙漠中的一杯水一样珍重，感谢那些帮助过我的好人，谢谢~
 
@@ -46,4 +46,4 @@ npm run build
 - [G2 可视化引擎](https://antv-g2.gitee.io/zh/) 
 
 
-## License
+
