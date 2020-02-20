@@ -18,7 +18,13 @@
 - 使用mock数据模拟后台接口
 - iview表格，render函数使用
 - 路由拦截，localstorage存储用户名密码
+- 大屏数据-新型冠状病毒大数据可视化展板
 
+## 示例
+![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/1.jpg)
+![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/2.jpg)
+![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/3.jpg)
+![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/4.jpg)
 
 ## 说明模拟数据mock
 现在项目中开启了模拟数据mock
@@ -44,6 +50,7 @@ npm run build
 ## 参考
 - [iview](http://v1.iviewui.com/) 
 - [G2 可视化引擎](https://antv-g2.gitee.io/zh/) 
+- [echart](https://www.echartsjs.com/zh/index.html) 
 
 
 ## License

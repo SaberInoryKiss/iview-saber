@@ -51,7 +51,13 @@ const router = new VueRouter({
         },
       ]
     },
-    
+    {
+      path:'/data',
+      component: () => import('@/views/data.vue'),
+      meta:{
+        title: '大屏数据'
+      }
+    },
   ],
   mode: 'history'
 })

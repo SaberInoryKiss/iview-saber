@@ -1,0 +1,383 @@
+<template>
+	<div class="home">
+		<canvas id="canv"></canvas>
+		<bg></bg>
+		<div class="head">
+			<h1 style="letter-spacing:15px">新型冠状病毒大数据可视化展板</h1>
+			<div class="weather">
+				<span>{{nowTime}}</span>
+                <router-link to="/"><span>管理平台</span></router-link>
+			</div>
+			<div class="mainbox">
+				<ul class="clearfix">
+					<li>
+						<box title="严重省份TOP5">
+							<bar ref="e1" class="allnav" :data="provinceList" color="#2f89cf"></bar>
+						</box>
+						<box title="严重城市TOP5">
+							<bar ref="e2" class="allnav" :data="cityList"  color="#27d08a"></bar>
+						</box>
+						<box>
+							<pie ref="e3" class="sy" :data="ageList" title="年龄分布"></pie>
+							<pie ref="e4" class="sy" :data="genderList" title="性别分布"></pie>
+							<pie ref="e5" class="sy" :data="jobList" title="职业"></pie>
+						</box>
+					</li>
+					<li>
+					<div class="bar">
+						<div class="barbox">
+						<ul class="clearfix">
+							<li class="pulll_left counter">{{ganran}}</li>
+							<li class="pulll_left counter">{{zhiyu}}</li>
+						</ul>
+						</div>
+						<div class="barbox2">
+						<ul class="clearfix">
+							<li class="pulll_left">累计确诊患者总数</li>
+							<li class="pulll_left">累计治愈患者总数</li>
+						</ul>
+						</div>
+					</div>
+					<div class="map">
+						<div class="map1">
+						<img src="picture/lbx.png" />
+						</div>
+						<div class="map2">
+						<img src="picture/jt.png" />
+						</div>
+						<div class="map3">
+						<img src="picture/map.png" />
+						</div>
+						<china-area ref="map"></china-area>
+					</div>
+					</li>
+					<li>
+						<box title="最新动态">	
+							<ul class="dongtailist">
+								<li :style="dongtaistyle(item.type)" v-for="item in dongtailist" :key="item.id">
+									[
+									<span>{{item.type | fmtDongtaiType}}</span>
+									]
+									{{item.content}}
+									{{item.time}}
+									</li>
+							</ul>
+						</box>
+						<box title="全国新增 确诊数/疑似数">
+							<eline ref="e6" :data="qylist"></eline>
+						</box>
+						<box title="全国新增 治愈数/死亡数">
+							<eline ref="e7" :data="zslist"></eline>
+						</box>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+import "@/assets/css/home.css";
+import bg from '@/components/BackgroundCanvas'
+import '@/assets/js/setFontSize'
+import bar from '@/components/echarts/bar'
+import pie from '@/components/echarts/pie'
+import eline from '@/components/echarts/line'
+import box from '@/components/Box'
+import chinaArea from "@/components/echarts/area";
+export default {
+	name: "Home",
+	components: {
+		bg,
+		bar,
+		pie,
+		eline,
+		box,
+		chinaArea
+	},
+	data() {
+		return {
+			provinceList: [
+				{
+					label: '湖北',
+					value: '59989'
+				},
+				{
+					label: '广东',
+					value: '1328'
+				},
+				{
+					label: '河南',
+					value: '1257'
+				},
+				{
+					label: '浙江',
+					value: '1172'
+				},
+				{
+					label: '湖南',
+					value: '1007'
+				},
+				{
+					label: '安徽',
+					value: '1007'
+				},
+				{
+					label: '江西',
+					value: '933'
+				},
+			],
+			cityList: [
+				{
+					label: '武汉',
+					value: '37152'
+				},
+				{
+					label: '孝感',
+					value: '3320'
+				},
+				{
+					label: '黄冈',
+					value: '2820'
+				},
+				{
+					label: '荆州',
+					value: '1537'
+				},
+				{
+					label: '鄂州',
+					value: '1339'
+				},
+				{
+					label: '随州',
+					value: '1278'
+				},
+				{
+					label: '襄阳',
+					value: '1163'
+				},
+			],
+			ageList: [
+				{
+					name: "10岁下",
+					value:1
+				},
+				{
+					name: "20-29",
+					value:1 
+				},
+				{
+					name: "30-39",
+					value:2
+				},
+				{
+					name: "40-49",
+					value:3
+				},
+				{
+					name: "50-59",
+					value:4
+				},
+				{
+					name: "60岁上",
+					value:5
+				}
+			],
+			genderList: [
+				{
+					name: '男',
+					value: 1
+				},
+				{
+					name: '女',
+					value: 1
+				},
+			],
+			jobList: [
+				{
+					name: '医生',
+					value:'3'
+				},
+				{
+					name: '教师',
+					value:'1'
+				},
+				{
+					name: '司机',
+					value:'2'
+				},
+				{
+					name: '售货员',
+					value:'3'
+				},
+				{
+					name: '退休人员',
+					value:'6'
+				},
+			],
+			qylist: {
+				title: ["确诊", "疑似"],
+				color: ["#66e783", "#1a9bde"],
+				date: [1.26,1.27,1.28,1.29,1.30,1.31,2.1,2.2,2.3],
+				data: [
+					[769, 1771, 1459, 1731, 1982, 2102, 2590, 2829, 3235],
+					[3806, 2007, 3228, 4148, 4812, 5019, 4562, 5173, 5072]
+				]
+			},
+			zslist: {
+				title: ["治愈", "死亡"],
+				color: ["#00FA9A", "#FF4500"],
+				date: [1.26,1.27,1.28,1.29,1.30,1.31,2.1,2.2,2.3],
+				data: [
+					[51, 60, 103, 126, 171, 243, 328, 475, 632],
+					[80, 106, 132, 170, 213, 259, 304, 361, 425]
+				]
+			},
+			dongtailist: [
+				{
+					id: 1,
+					content:'湖北省武汉市洪山区确诊一例',
+					time:'5分钟前',
+					type: 0
+				},
+				{
+					id: 2,
+					content:'湖北省武汉市江汉区治愈一例',
+					time:'5分钟前',
+					type: 1
+				},{
+					id: 3,
+					content:'湖北省武汉市武昌区疑似一例',
+					time:'5分钟前',
+					type: 2
+				},{
+					id: 4,
+					content:'湖北省武汉市汉阳区死亡一例',
+					time:'5分钟前',
+					type: 3
+				},{
+					id: 5,
+					content:'湖北省武汉市汉阳区死亡一例',
+					time:'5分钟前',
+					type: 2
+				},{
+					id: 6,
+					content:'湖北省武汉市汉阳区死亡一例',
+					time:'5分钟前',
+					type: 3
+				},
+			],
+			cityganranlist:[],
+			ganran: 74679,
+            zhiyu: 16426,
+            nowTime:'',
+            nowDate:''
+		}
+	},
+	filters: {
+		fmtDongtaiType(val) {
+			return ["确诊", "治愈", "疑似", "死亡"][val];
+		}	
+	},
+	mounted () {
+        this.currentTime();
+		
+		// window.onload = window.onresize = ()=> {
+			let html = document.querySelector('html')
+			html.style.fontSize = window.innerWidth / 20 + 'px'
+			Object.keys(this.$refs).forEach(a => {
+				this.$refs[a].init()
+			});
+			// this.$refs.e1.init()
+			// this.$refs.e2.init()
+		// }
+	},
+	methods: {
+		dongtaistyle(val) {
+			return { color: ["orangered", "green", "yellow", "red"][val] };
+        },
+        
+        currentTime() {
+            setInterval(this.getDate, 500);
+        },
+        getDate() {
+            let yy = new Date().getFullYear();
+            let mm = new Date().getMonth() + 1;
+            let dd = new Date().getDate();
+            let week = new Date().getDay();
+            let hh = new Date().getHours();
+            let mf =
+                new Date().getMinutes() < 10
+                    ? "0" + new Date().getMinutes()
+                    : new Date().getMinutes();
+            if (week == 1) {
+                this.nowWeek = "星期一";
+            } else if (week == 2) {
+                this.nowWeek = "星期二";
+            } else if (week == 3) {
+                this.nowWeek = "星期三";
+            } else if (week == 4) {
+                this.nowWeek = "星期四";
+            } else if (week == 5) {
+                this.nowWeek = "星期五";
+            } else if (week == 6) {
+                this.nowWeek = "星期六";
+            } else {
+                this.nowWeek = "星期日";
+            }
+            this.nowTime =yy + "/" + mm + "/" + dd + "/ " + hh + ":" + mf;
+            this.nowDate = yy + "/" + mm + "/" + dd;
+        },
+    },
+    // 销毁定时器
+    beforeDestroy: function() {
+        if (this.getDate) {
+            console.log("销毁定时器")
+            clearInterval(this.getDate); // 在Vue实例销毁前，清除时间定时器
+        }
+    }
+};
+</script>
+
+<style scoped>
+/* .home {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000d4a url(../assets/images/bg.jpg) center top;
+  background-size: cover;
+  color: #666;
+  font-size: 0.1rem;
+} */
+
+.dongtailist li,
+.dongtailist li span {
+  font-size: 14px;
+  padding: 5px;
+  text-align: left;
+}
+
+
+.dongtailist{
+        overflow-y: auto;
+        padding: 10px;
+        height:90%;
+    }
+        .dongtailist::-webkit-scrollbar {/*滚动条整体样式*/
+            width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+            height: 4px;
+            scrollbar-arrow-color:red;
+
+        }
+        .dongtailist::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+            border-radius: 5px;
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            background: #fff;
+            scrollbar-arrow-color:#fff;
+        }
+        .dongtailist::-webkit-scrollbar-track {/*滚动条里面轨道*/
+            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            border-radius: 0;
+            background: rgba(0,0,0,0.2);
+        }
+</style>

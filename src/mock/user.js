@@ -18,7 +18,7 @@ Mock.mock('/showList', { //输出数据
     'showList|56': [
         {
             'id|+1': 1,
-            "img": "https://b304.photo.store.qq.com/psb?/V104Mmz10rAAbQ/yjYKi3M50IhMIFKTOyYHBlzcF9gz2tKZh.gEqIkN1dY!/b/dDABAAAAAAAA&bo=vALuArwC7gIDCSw!&rf=viewer_4",
+            "img": "http://r.photo.store.qq.com/psb?/V104Mmz10rAAbQ/HM1s5KtcrSNV*zukfz.Rtbm565CGTisKlqf2SPN4oZQ!/r/dFYBAAAAAAAA",
             "title": "@ctitle(2,3)",
             'artistname': '@cname', //随机生成姓名
             "type": "@csentence(2,3)",

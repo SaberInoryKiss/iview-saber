@@ -83,6 +83,10 @@
                         </div>
                     </div>
                     <div>
+                        <MenuItem to="/data">
+                            <Icon type="md-desktop" />
+                            大屏数据
+                        </MenuItem>
                         <Dropdown trigger="click" style="margin-left: 20px">
                             <a>
                                 <Avatar style="color: #f56a00;background-color: #fde3cf">U</Avatar>
@@ -110,7 +114,7 @@
                                 <span>用户管理</span>
                             </template>
                             <MenuItem name="1-1" to="/userList">用户列表</MenuItem>
-                            <MenuItem name="1-2" to="/userStatistics">用户统计</MenuItem>
+                            <MenuItem name="1-2">用户统计</MenuItem>
                         </Submenu>
                         <Submenu name="2">
                             <template slot="title">
