@@ -21,10 +21,10 @@
 - 大屏数据-新型冠状病毒大数据可视化展板
 
 ## 示例
-![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/1.jpg)
-![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/2.jpg)
-![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/3.jpg)
-![image](https://github.com/SaberInoryKiss/iview-saber/tree/master/src/assets/screenShots/4.jpg)
+![image](https://github.com/SaberInoryKiss/iview-saber/blob/master/src/assets/screenShots/1.jpg)
+![image](https://github.com/SaberInoryKiss/iview-saber/blob/master/src/assets/screenShots/2.jpg)
+![image](https://github.com/SaberInoryKiss/iview-saber/blob/master/src/assets/screenShots/3.jpg)
+![image](https://github.com/SaberInoryKiss/iview-saber/blob/master/src/assets/screenShots/4.jpg)
 
 ## 说明模拟数据mock
 现在项目中开启了模拟数据mock
