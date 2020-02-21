@@ -83,11 +83,11 @@
                         </div>
                     </div>
                     <div>
-                        <MenuItem to="/data">
+                        <a @click="dataMap">
                             <Icon type="md-desktop" />
                             大屏数据
-                        </MenuItem>
-                        <Dropdown trigger="click" style="margin-left: 20px">
+                        </a>
+                        <Dropdown trigger="click" style="margin-left: 20px; margin-right:20px">
                             <a>
                                 <Avatar style="color: #f56a00;background-color: #fde3cf">U</Avatar>
                                 {{UserName}}
@@ -208,6 +208,9 @@ import { mapMutations, mapGetters } from 'vuex';
                 // util.storage.remove(this.$config.KEY.CACHE_LOGIN_USER_NAME)
                 // util.storage.remove(this.$config.KEY.CACHE_LOGIN_PASS_PWD)
                 this.$router.push("/login")
+            },
+            dataMap() {
+                this.$router.push("/data")
             }
         }
     }

@@ -42,6 +42,7 @@ a:hover{ color:#06c; text-decoration: none!important}
 .weather{ position:absolute; right:.3rem; top:0; line-height: .75rem;}
 .weather img{ width:.37rem; display: inline-block; vertical-align: middle;}
 .weather span{color:rgba(255,255,255,.7); font-size: .18rem; padding-right: .1rem;}
+.weather a{ font-size: .18rem; }
 .mainbox{ padding:.1rem .1rem 0rem .1rem;}
 .mainbox>ul{}
 .mainbox>ul>li{ float: left; padding: 0 .1rem}

@@ -96,9 +96,11 @@ export default {
 
       this.myChart.setOption(option);
       this.myChart.resize();
-      window.addEventListener("resize", function() {
-        this.myChart.resize();
-      });
+      // console.log(this.myChart)
+      // window.addEventListener("resize", function() {
+        
+      //   this.myChart.resize();
+      // });
     }
   }
 };

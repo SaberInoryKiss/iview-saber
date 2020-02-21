@@ -8,7 +8,7 @@
 import initBackgroundCanvas from './js/bg.js'
 export default {
     mounted () {
-		initBackgroundCanvas()
+        initBackgroundCanvas()
 	}
 }
 </script>

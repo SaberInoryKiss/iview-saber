@@ -152,25 +152,25 @@ var trans = {
 
 
 
-var threeD = function(param) {
-this.transIn = {};
-this.transOut = {};
-this.transIn.vtx = (param.vtx);
-this.transIn.sz = (param.sz);
-this.transIn.rot = (param.rot);
-this.transIn.pos = (param.pos);
-};
+// var threeD = function(param) {
+// this.transIn = {};
+// this.transOut = {};
+// this.transIn.vtx = (param.vtx);
+// this.transIn.sz = (param.sz);
+// this.transIn.rot = (param.rot);
+// this.transIn.pos = (param.pos);
+// };
 
-threeD.prototype.vupd = function() {
-this.transOut = trans.steps(
+// threeD.prototype.vupd = function() {
+// this.transOut = trans.steps(
 
-    this.transIn.vtx,
-    this.transIn.sz,
-    this.transIn.rot,
-    this.transIn.pos,
-    cam.disp
-);
-};
+//     this.transIn.vtx,
+//     this.transIn.sz,
+//     this.transIn.rot,
+//     this.transIn.pos,
+//     cam.disp
+// );
+// };
 
 var Build = function() {
 this.vel = 0.04;
@@ -210,28 +210,28 @@ this.objSz = {
 };
 
 Build.prototype.add = function() {
-this.varr.push(new threeD({
-    vtx: {
-    x: rnd(),
-    y: rnd(),
-    z: rnd()
-    },
-    sz: {
-    x: 0,
-    y: 0,
-    z: 0
-    },
-    rot: {
-    x: 20,
-    y: -20,
-    z: 0
-    },
-    pos: {
-    x: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
-    y: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
-    z: this.diff * Math.sin(360 * Math.random() * Math.PI / 180)
-    }
-}));
+// this.varr.push(new threeD({
+//     vtx: {
+//     x: rnd(),
+//     y: rnd(),
+//     z: rnd()
+//     },
+//     sz: {
+//     x: 0,
+//     y: 0,
+//     z: 0
+//     },
+//     rot: {
+//     x: 20,
+//     y: -20,
+//     z: 0
+//     },
+//     pos: {
+//     x: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
+//     y: this.diff * Math.sin(360 * Math.random() * Math.PI / 180),
+//     z: this.diff * Math.sin(360 * Math.random() * Math.PI / 180)
+//     }
+// }));
 this.calc.push({
     x: 360 * Math.random(),
     y: 360 * Math.random(),
@@ -327,8 +327,4 @@ export default function initBackgroundCanvas() {
 }
 // app.run();
 
-window.addEventListener('resize', function() {
-  let canvas = document.getElementById('canv')
-  canvas.width = w = window.innerWidth;
-  canvas.height = h = window.innerHeight;
-}, false);
+

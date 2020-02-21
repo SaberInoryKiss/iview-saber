@@ -1,12 +1,11 @@
 <template>
 	<div class="home">
-		<canvas id="canv"></canvas>
 		<bg></bg>
 		<div class="head">
 			<h1 style="letter-spacing:15px">新型冠状病毒大数据可视化展板</h1>
 			<div class="weather">
 				<span>{{nowTime}}</span>
-                <router-link to="/"><span>管理平台</span></router-link>
+                <router-link to="/"><a>管理平台</a></router-link>
 			</div>
 			<div class="mainbox">
 				<ul class="clearfix">
@@ -281,13 +280,13 @@ export default {
 	},
 	mounted () {
         this.currentTime();
-		
 		// window.onload = window.onresize = ()=> {
-			let html = document.querySelector('html')
-			html.style.fontSize = window.innerWidth / 20 + 'px'
-			Object.keys(this.$refs).forEach(a => {
-				this.$refs[a].init()
-			});
+		let html = document.querySelector('html')
+		html.style.fontSize = window.innerWidth / 20 + 'px'
+		Object.keys(this.$refs).forEach(a => {
+			this.$refs[a].init()
+		});
+			
 			// this.$refs.e1.init()
 			// this.$refs.e2.init()
 		// }
@@ -359,25 +358,25 @@ export default {
 
 
 .dongtailist{
-        overflow-y: auto;
-        padding: 10px;
-        height:90%;
-    }
-        .dongtailist::-webkit-scrollbar {/*滚动条整体样式*/
-            width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
-            height: 4px;
-            scrollbar-arrow-color:red;
+	overflow-y: auto;
+	padding: 10px;
+	height:90%;
+}
+.dongtailist::-webkit-scrollbar {/*滚动条整体样式*/
+	width: 4px;     /*高宽分别对应横竖滚动条的尺寸*/
+	height: 4px;
+	scrollbar-arrow-color:red;
 
-        }
-        .dongtailist::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-            border-radius: 5px;
-            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-            background: #fff;
-            scrollbar-arrow-color:#fff;
-        }
-        .dongtailist::-webkit-scrollbar-track {/*滚动条里面轨道*/
-            -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-            border-radius: 0;
-            background: rgba(0,0,0,0.2);
-        }
+}
+.dongtailist::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+	border-radius: 5px;
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+	background: #fff;
+	scrollbar-arrow-color:#fff;
+}
+.dongtailist::-webkit-scrollbar-track {/*滚动条里面轨道*/
+	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+	border-radius: 0;
+	background: rgba(0,0,0,0.2);
+}
 </style>
