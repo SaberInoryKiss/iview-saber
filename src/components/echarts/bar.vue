@@ -7,7 +7,22 @@
 <script>
 import echarts from 'echarts'
 export default {
-    props:[ 'data','color'],
+    props:{
+        data: {
+            type: Array,
+            default: () => []
+        },
+        color: {
+            type: String
+        },
+    },
+    watch: {
+        data(newVal,oldVal) {
+            this.data = newVal
+            this.init()
+        },
+        deep: true
+    },
     mounted() {
     },
     methods: {
@@ -15,7 +30,6 @@ export default {
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(this.$refs.container);
 
-            
             
             let option = {
                 //  backgroundColor: '#00265f',

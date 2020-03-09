@@ -10,10 +10,10 @@
 			<div class="mainbox">
 				<ul class="clearfix">
 					<li>
-						<box title="严重省份TOP5">
+						<box title="全国严重省份TOP7">
 							<bar ref="e1" class="allnav" :data="provinceList" color="#2f89cf"></bar>
 						</box>
-						<box title="严重城市TOP5">
+						<box title="湖北严重城市TOP7">
 							<bar ref="e2" class="allnav" :data="cityList"  color="#27d08a"></bar>
 						</box>
 						<box>
@@ -47,7 +47,7 @@
 						<div class="map3">
 						<img src="picture/map.png" />
 						</div>
-						<china-area ref="map"></china-area>
+						<china-area ref="map" :data="maplist"></china-area>
 					</div>
 					</li>
 					<li>
@@ -96,66 +96,8 @@ export default {
 	},
 	data() {
 		return {
-			provinceList: [
-				{
-					label: '湖北',
-					value: '59989'
-				},
-				{
-					label: '广东',
-					value: '1328'
-				},
-				{
-					label: '河南',
-					value: '1257'
-				},
-				{
-					label: '浙江',
-					value: '1172'
-				},
-				{
-					label: '湖南',
-					value: '1007'
-				},
-				{
-					label: '安徽',
-					value: '1007'
-				},
-				{
-					label: '江西',
-					value: '933'
-				},
-			],
-			cityList: [
-				{
-					label: '武汉',
-					value: '37152'
-				},
-				{
-					label: '孝感',
-					value: '3320'
-				},
-				{
-					label: '黄冈',
-					value: '2820'
-				},
-				{
-					label: '荆州',
-					value: '1537'
-				},
-				{
-					label: '鄂州',
-					value: '1339'
-				},
-				{
-					label: '随州',
-					value: '1278'
-				},
-				{
-					label: '襄阳',
-					value: '1163'
-				},
-			],
+			provinceList: [],
+			cityList: [],
 			ageList: [
 				{
 					name: "10岁下",
@@ -217,21 +159,16 @@ export default {
 			qylist: {
 				title: ["确诊", "疑似"],
 				color: ["#66e783", "#1a9bde"],
-				date: [1.26,1.27,1.28,1.29,1.30,1.31,2.1,2.2,2.3],
-				data: [
-					[769, 1771, 1459, 1731, 1982, 2102, 2590, 2829, 3235],
-					[3806, 2007, 3228, 4148, 4812, 5019, 4562, 5173, 5072]
-				]
+				date: [],
+				data: []
 			},
 			zslist: {
 				title: ["治愈", "死亡"],
 				color: ["#00FA9A", "#FF4500"],
-				date: [1.26,1.27,1.28,1.29,1.30,1.31,2.1,2.2,2.3],
-				data: [
-					[51, 60, 103, 126, 171, 243, 328, 475, 632],
-					[80, 106, 132, 170, 213, 259, 304, 361, 425]
-				]
+				date: [],
+				data: []
 			},
+			maplist:[],
 			dongtailist: [
 				{
 					id: 1,
@@ -267,8 +204,8 @@ export default {
 				},
 			],
 			cityganranlist:[],
-			ganran: 74679,
-            zhiyu: 16426,
+			ganran: '',
+            zhiyu: '',
             nowTime:'',
             nowDate:''
 		}
@@ -278,6 +215,51 @@ export default {
 			return ["确诊", "治愈", "疑似", "死亡"][val];
 		}	
 	},
+	created () {
+		this.getNCP()
+		this.$axios.get("https://service-n9zsbooc-1252957949.gz.apigw.tencentcs.com/release/qq")
+		.then(res => {
+			// console.log(res.data.data)
+			//柱状图数据
+			this.arrProvince = res.data.data.disease_h5.areaTree[0].children.map(item => ({
+				label:item.name,
+				value:item.total.confirm
+			}))
+			this.maplist = res.data.data.disease_h5.areaTree[0].children.map(item => ({
+				name:item.name,
+				value:item.total.confirm
+			}))
+			let arrCity = res.data.data.disease_h5.areaTree[0].children[0].children.map(item => ({
+				label:item.name,
+				value:item.total.confirm
+			}))
+			this.provinceList = this.arrProvince.slice(0,7)
+			this.cityList = arrCity.slice(0,7)
+			this.ganran = res.data.data.wuwei_ww_global_vars[0].confirmCount
+			this.zhiyu = res.data.data.wuwei_ww_global_vars[0].cure
+				
+			//折线图数据
+			let date = []
+			let confirm = []
+			let suspect = []
+			let dead = []
+			let heal = []
+			res.data.data.wuwei_ww_cn_day_counts.map(item => {
+				date.push(item.date)
+				confirm.push(item.confirm)
+				suspect.push(item.suspect)
+				dead.push(item.dead)
+				heal.push(item.heal)
+			})
+			this.qylist.date = date.slice(-11)
+			this.qylist.data[0] = confirm.slice(-11)
+			this.qylist.data[1] = suspect.slice(-11)
+			// console.log(this.zslist)
+			this.zslist.date = date.slice(-11)
+			this.zslist.data[0] = heal.slice(-11)
+			this.zslist.data[1] = dead.slice(-11)
+		})
+	},
 	mounted () {
         this.currentTime();
 		// window.onload = window.onresize = ()=> {
@@ -286,12 +268,13 @@ export default {
 		Object.keys(this.$refs).forEach(a => {
 			this.$refs[a].init()
 		});
-			
-			// this.$refs.e1.init()
-			// this.$refs.e2.init()
-		// }
 	},
 	methods: {
+		//通过
+		getNCP() {
+			
+		},
+
 		dongtaistyle(val) {
 			return { color: ["orangered", "green", "yellow", "red"][val] };
         },
@@ -373,10 +356,12 @@ export default {
 	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 	background: #fff;
 	scrollbar-arrow-color:#fff;
+	box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
 .dongtailist::-webkit-scrollbar-track {/*滚动条里面轨道*/
 	-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 	border-radius: 0;
 	background: rgba(0,0,0,0.2);
+	box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
 }
 </style>
