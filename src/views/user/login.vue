@@ -1,9 +1,18 @@
+<!--
+ * @Author: 夏开尧
+ * @Description: file content
+ * @Date: 2020-05-21 09:40:56
+ * @LastEditTime: 2020-05-22 18:44:24
+ * @LastEditors: 夏开尧
+ * @UpdateLogs: logs
+--> 
 <style lang="less">
 @import "./login.less";
 </style>
 
 <template>
 	<div class="login">
+		<div class="sign_canvas"></div>
 		<div class="login-con">	
 			<Card icon="log-in" title="欢迎登录" :bordered="false">	
 				<div class="form-con">	
@@ -19,6 +28,7 @@
 import LoginForm from "@/components/login-form";
 import mockData from "@/mock/index.js";
 import { mapMutations } from "vuex"
+import lottie from 'lottie-web';
 // import util from "@/util";
 export default {
 	components: {
@@ -27,6 +37,15 @@ export default {
 	// computed: {
 	// 	...mapState(["loginUserName"])
 	// },
+	mounted () {
+        lottie.loadAnimation({
+            container: document.querySelector('.sign_canvas'),
+            enderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'data7.json',
+		});
+    },
 	methods: {
 
 		...mapMutations(["setLoginUserName","setLoginUserpwd"]),

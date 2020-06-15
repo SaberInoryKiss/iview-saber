@@ -10,10 +10,10 @@
 			<div class="mainbox">
 				<ul class="clearfix">
 					<li>
-						<box title="全国严重省份TOP7">
+						<box title="全国累计确诊省份TOP7">
 							<bar ref="e1" class="allnav" :data="provinceList" color="#2f89cf"></bar>
 						</box>
-						<box title="湖北严重城市TOP7">
+						<box title="湖北累计确诊地区TOP7">
 							<bar ref="e2" class="allnav" :data="cityList"  color="#27d08a"></bar>
 						</box>
 						<box>
@@ -217,26 +217,78 @@ export default {
 	},
 	created () {
 		this.getNCP()
-		this.$axios.get("https://service-n9zsbooc-1252957949.gz.apigw.tencentcs.com/release/qq")
+		// this.$axios.get("https://service-n9zsbooc-1252957949.gz.apigw.tencentcs.com/release/qq")
+
+		// 腾讯接口处理
+		// this.$axios.get("/api/g2/getOnsInfo?name=disease_h5")
+		// .then(res => {
+		// 	console.log(JSON.parse(res.data.data))
+		// 	//柱状图数据
+		// 	let arrProvince = JSON.parse(res.data.data).areaTree[0].children.map(item => {
+		// 		return {label:item.name, value:item.today.confirm}
+		// 	})
+		// 	arrProvince.sort((a,b) => {
+		// 		return b.value - a.value;
+		// 	})
+		// 	this.maplist = JSON.parse(res.data.data).areaTree[0].children.map(item => ({
+		// 		name:item.name,
+		// 		value:item.total.confirm
+		// 	}))
+		// 	let arrCity = JSON.parse(res.data.data).areaTree[0].children[0].children.map(item => ({
+		// 		label:item.name,
+		// 		value:item.total.confirm
+		// 	}))
+		// 	this.provinceList = arrProvince.slice(0,7)
+		// 	this.cityList = arrCity.slice(0,7)
+
+		// 	// 标题数据
+		// 	this.ganran = JSON.parse(res.data.data).chinaTotal.confirm
+		// 	this.zhiyu = JSON.parse(res.data.data).chinaTotal.heal
+				
+		// 	//折线图数据
+		// 	let date = []
+		// 	let confirm = []
+		// 	let suspect = []
+		// 	let dead = []
+		// 	let heal = []
+		// 	res.data.data.wuwei_ww_cn_day_counts.map(item => {
+		// 		date.push(item.date)
+		// 		confirm.push(item.confirm)
+		// 		suspect.push(item.suspect)
+		// 		dead.push(item.dead)
+		// 		heal.push(item.heal)
+		// 	})
+		// 	this.qylist.date = date.slice(-11)
+		// 	this.qylist.data[0] = confirm.slice(-11)
+		// 	this.qylist.data[1] = suspect.slice(-11)
+		// 	// console.log(this.zslist)
+		// 	this.zslist.date = date.slice(-11)
+		// 	this.zslist.data[0] = heal.slice(-11)
+		// 	this.zslist.data[1] = dead.slice(-11)
+		// })
+
+		// 163接口处理
+		this.$axios.get("/api/ug/api/wuhan/app/data/list-total")
 		.then(res => {
 			// console.log(res.data.data)
 			//柱状图数据
-			this.arrProvince = res.data.data.disease_h5.areaTree[0].children.map(item => ({
+			this.arrProvince = res.data.data.areaTree[2].children.map(item => ({
 				label:item.name,
 				value:item.total.confirm
 			}))
-			this.maplist = res.data.data.disease_h5.areaTree[0].children.map(item => ({
+			this.maplist = res.data.data.areaTree[2].children.map(item => ({
 				name:item.name,
 				value:item.total.confirm
 			}))
-			let arrCity = res.data.data.disease_h5.areaTree[0].children[0].children.map(item => ({
+			let arrCity = res.data.data.areaTree[2].children[0].children.map(item => ({
 				label:item.name,
 				value:item.total.confirm
 			}))
 			this.provinceList = this.arrProvince.slice(0,7)
 			this.cityList = arrCity.slice(0,7)
-			this.ganran = res.data.data.wuwei_ww_global_vars[0].confirmCount
-			this.zhiyu = res.data.data.wuwei_ww_global_vars[0].cure
+			// 标题数据
+			this.ganran = res.data.data.areaTree[2].total.confirm
+			this.zhiyu = res.data.data.areaTree[2].total.heal
 				
 			//折线图数据
 			let date = []
@@ -244,12 +296,12 @@ export default {
 			let suspect = []
 			let dead = []
 			let heal = []
-			res.data.data.wuwei_ww_cn_day_counts.map(item => {
+			res.data.data.chinaDayList.map(item => {
 				date.push(item.date)
-				confirm.push(item.confirm)
-				suspect.push(item.suspect)
-				dead.push(item.dead)
-				heal.push(item.heal)
+				confirm.push(item.today.confirm)
+				suspect.push(item.today.suspect)
+				dead.push(item.today.dead)
+				heal.push(item.today.heal)
 			})
 			this.qylist.date = date.slice(-11)
 			this.qylist.data[0] = confirm.slice(-11)

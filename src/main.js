@@ -1,3 +1,11 @@
+/*
+ * @Author: 夏开尧
+ * @Description: file content
+ * @Date: 2020-05-21 09:40:56
+ * @LastEditTime: 2020-06-15 11:00:29
+ * @LastEditors: 夏开尧
+ * @UpdateLogs: logs
+ */ 
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router';
@@ -6,6 +14,7 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 
 import axios from 'axios'
+axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios  // 挂载在vue实例化对象上
 
 import config from '@/config';

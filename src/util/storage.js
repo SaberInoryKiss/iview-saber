@@ -1,4 +1,12 @@
-const storage = localStorage
+/*
+ * @Author: 夏开尧
+ * @Description: file content
+ * @Date: 2020-05-21 09:40:56
+ * @LastEditTime: 2020-06-15 09:29:43
+ * @LastEditors: 夏开尧
+ * @UpdateLogs: logs
+ */ 
+const storage = sessionStorage
 
 export default {
     set(key,val) {
