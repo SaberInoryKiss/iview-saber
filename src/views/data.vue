@@ -2,7 +2,7 @@
 	<div class="home">
 		<bg></bg>
 		<div class="head">
-			<h1 style="letter-spacing:15px">新型冠状病毒大数据可视化展板</h1>
+			<h1 style="letter-spacing:15px">农产品批发市场大数据可视化展板</h1>
 			<div class="weather">
 				<span>{{nowTime}}</span>
                 <router-link to="/"><a>管理平台</a></router-link>
@@ -10,16 +10,16 @@
 			<div class="mainbox">
 				<ul class="clearfix">
 					<li>
-						<box title="全国累计确诊省份TOP7">
+						<box title="农产品支付宝交易排行">
 							<bar ref="e1" class="allnav" :data="provinceList" color="#2f89cf"></bar>
 						</box>
-						<box title="湖北累计确诊地区TOP7">
+						<box title="农产品微信交易排行">
 							<bar ref="e2" class="allnav" :data="cityList"  color="#27d08a"></bar>
 						</box>
 						<box>
-							<pie ref="e3" class="sy" :data="ageList" title="年龄分布"></pie>
-							<pie ref="e4" class="sy" :data="genderList" title="性别分布"></pie>
-							<pie ref="e5" class="sy" :data="jobList" title="职业"></pie>
+							<pie ref="e3" class="sy" :data="ageList" title="周谷堆大兴物流园"></pie>
+							<pie ref="e4" class="sy" :data="genderList" title="宿州百物流中心"></pie>
+							<pie ref="e5" class="sy" :data="jobList" title="肥西物流园"></pie>
 						</box>
 					</li>
 					<li>
@@ -32,8 +32,8 @@
 						</div>
 						<div class="barbox2">
 						<ul class="clearfix">
-							<li class="pulll_left">累计确诊患者总数</li>
-							<li class="pulll_left">累计治愈患者总数</li>
+							<li class="pulll_left">累计交易量(单)</li>
+							<li class="pulll_left">累计交易金额(元)</li>
 						</ul>
 						</div>
 					</div>
@@ -62,10 +62,10 @@
 									</li>
 							</ul>
 						</box>
-						<box title="全国新增 确诊数/疑似数">
+						<box title="安徽省新增 银行卡笔数">
 							<eline ref="e6" :data="qylist"></eline>
 						</box>
-						<box title="全国新增 治愈数/死亡数">
+						<box title="安徽省新增 交易金额">
 							<eline ref="e7" :data="zslist"></eline>
 						</box>
 					</li>
@@ -157,13 +157,13 @@ export default {
 				},
 			],
 			qylist: {
-				title: ["确诊", "疑似"],
+				title: ["微信", "支付宝"],
 				color: ["#66e783", "#1a9bde"],
 				date: [],
 				data: []
 			},
 			zslist: {
-				title: ["治愈", "死亡"],
+				title: ["银行卡", "微信"],
 				color: ["#00FA9A", "#FF4500"],
 				date: [],
 				data: []
@@ -172,47 +172,47 @@ export default {
 			dongtailist: [
 				{
 					id: 1,
-					content:'湖北省武汉市洪山区确诊一例',
+					content:'安徽省合肥市新增交易订单',
 					time:'5分钟前',
 					type: 0
 				},
 				{
 					id: 2,
-					content:'湖北省武汉市江汉区治愈一例',
+					content:'安徽省合肥市新增交易订单',
 					time:'5分钟前',
 					type: 1
 				},{
 					id: 3,
-					content:'湖北省武汉市武昌区疑似一例',
+					content:'安徽省合肥市新增交易订单',
 					time:'5分钟前',
 					type: 2
 				},{
 					id: 4,
-					content:'湖北省武汉市汉阳区死亡一例',
+					content:'安徽省合肥市新增交易订单',
 					time:'5分钟前',
 					type: 3
 				},{
 					id: 5,
-					content:'湖北省武汉市汉阳区死亡一例',
+					content:'安徽省合肥市新增交易订单',
 					time:'5分钟前',
 					type: 2
 				},{
 					id: 6,
-					content:'湖北省武汉市汉阳区死亡一例',
+					content:'安徽省合肥市新增交易订单',
 					time:'5分钟前',
 					type: 3
 				},
 			],
 			cityganranlist:[],
-			ganran: '',
-            zhiyu: '',
+			ganran: 873001,
+            zhiyu: 50000000,
             nowTime:'',
             nowDate:''
 		}
 	},
 	filters: {
 		fmtDongtaiType(val) {
-			return ["确诊", "治愈", "疑似", "死亡"][val];
+			return ["增加", "增加", "增加", "增加"][val];
 		}	
 	},
 	created () {
@@ -284,11 +284,63 @@ export default {
 				label:item.name,
 				value:item.total.confirm
 			}))
-			this.provinceList = this.arrProvince.slice(0,7)
-			this.cityList = arrCity.slice(0,7)
+			// this.provinceList = this.arrProvince.slice(0,7)
+			this.provinceList = [
+				{
+					label: '蔬菜',
+					value: 65000
+				},
+				{
+					label: '水果',
+					value: 56000
+				},
+				{
+					label: '水产品',
+					value: 49000
+				},
+				{
+					label: '畜禽肉类',
+					value: 45000
+				},
+				{
+					label: '粮油',
+					value: 33000
+				},
+				{
+					label: '土特产',
+					value: 28000
+				}
+			]
+			this.cityList = [
+				{
+					label: '蔬菜',
+					value: 55000
+				},
+				{
+					label: '水果',
+					value: 53000
+				},
+				{
+					label: '水产品',
+					value: 43000
+				},
+				{
+					label: '畜禽肉类',
+					value: 38000
+				},
+				{
+					label: '粮油',
+					value: 37000
+				},
+				{
+					label: '土特产',
+					value: 18000
+				}
+			]
+			// this.cityList = arrCity.slice(0,7)
 			// 标题数据
-			this.ganran = res.data.data.areaTree[2].total.confirm
-			this.zhiyu = res.data.data.areaTree[2].total.heal
+			// this.ganran = res.data.data.areaTree[2].total.confirm
+			// this.zhiyu = res.data.data.areaTree[2].total.heal
 				
 			//折线图数据
 			let date = []
@@ -362,14 +414,14 @@ export default {
             this.nowTime =yy + "/" + mm + "/" + dd + "/ " + hh + ":" + mf;
             this.nowDate = yy + "/" + mm + "/" + dd;
         },
-    },
-    // 销毁定时器
-    beforeDestroy: function() {
-        if (this.getDate) {
-            console.log("销毁定时器")
-            clearInterval(this.getDate); // 在Vue实例销毁前，清除时间定时器
-        }
-    }
+	},
+	// 销毁定时器
+	beforeDestroy: function() {
+			if (this.getDate) {
+					console.log("销毁定时器")
+					clearInterval(this.getDate); // 在Vue实例销毁前，清除时间定时器
+			}
+	}
 };
 </script>
 

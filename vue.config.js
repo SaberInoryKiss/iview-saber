@@ -2,12 +2,13 @@
  * @Author: 夏开尧
  * @Description: file content
  * @Date: 2020-05-21 09:40:56
- * @LastEditTime: 2020-06-15 12:19:01
+ * @LastEditTime: 2022-01-19 09:32:41
  * @LastEditors: 夏开尧
  * @UpdateLogs: logs
  */ 
 const path = require('path')
 // require('babel-polyfill')
+// const {VueLoaderPlugin} = require("vue-loader")
 
 const resolve = dir => {
   return path.join(__dirname, dir)
@@ -17,6 +18,7 @@ const BASE_URL = process.env.NODE_ENV === 'production'
   ? './'
   : './'
 module.exports = {
+  publicPath: './',
   transpileDependencies: [
     'iview',
     'axios'
@@ -40,5 +42,15 @@ module.exports = {
         }
       }
     }
-  }
+  },
+  // module:{
+  //     rules:[
+  //         {test:/\.css$/,loader:"style-loader!css-loader"},
+  //         {test:/\.vue$/,loader:"vue-loader"},
+  //         {test:/\.(jpg|png|jpeg|gif)$/,loader:"url-loader"}
+  //     ]
+  // },
+  // plugins:[
+  //   new VueLoaderPlugin()
+  // ]
 }

@@ -1,8 +1,17 @@
+<!--
+ * @Author: 夏开尧
+ * @Description: file content
+ * @Date: 2020-07-28 18:04:14
+ * @LastEditTime: 2020-08-05 17:11:22
+ * @LastEditors: 夏开尧
+ * @UpdateLogs: logs
+-->
 <template>
     <div>
         <Breadcrumb style="margin-bottom:20px">
             <BreadcrumbItem>工作平台</BreadcrumbItem>
             <BreadcrumbItem>首页</BreadcrumbItem>
+            <test></test>
         </Breadcrumb>
         <Row type="flex" justify="space-between">
             <Col span="4"> 
@@ -51,6 +60,7 @@ import mycard from '@/components/mycard'
 import column from '@/components/charts/column'
 import line from '@/components/charts/line'
 import pie from '@/components/charts/pie'
+import test from '@/components/test'
  
 export default {
     components: {
@@ -58,6 +68,7 @@ export default {
         "charts-column":column,
         "charts-line":line,
         "charts-pie":pie,
+        test
     },
     data() {
         return {  

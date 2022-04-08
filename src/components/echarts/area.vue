@@ -77,7 +77,7 @@ export default {
                   show: false
                 }
               },
-              roam: false, //禁止其放大缩小
+              roam: true, //禁止其放大缩小
               itemStyle: {
                 normal: {
                   areaColor: "#4c60ff",

@@ -30,6 +30,7 @@ export default {
     },
     methods: {
         init() {
+            console.log(this.data);
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(this.$refs.container);
             let option = {

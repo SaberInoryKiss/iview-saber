@@ -122,7 +122,8 @@
                                 <span>订单管理</span>
                             </template>
                             <MenuItem name="2-1" to="/showList">票务列表</MenuItem>
-                            <MenuItem name="2-2">Option 2</MenuItem>
+                            <MenuItem name="2-2" to="/textList">读取本地文件</MenuItem>
+                            <MenuItem name="2-3" to="/download">下载excel模板</MenuItem>
                         </Submenu>
                         <Submenu name="3">
                             <template slot="title">
@@ -131,6 +132,24 @@
                             </template>
                             <MenuItem name="3-1">Option 1</MenuItem>
                             <MenuItem name="3-2">Option 2</MenuItem>
+                        </Submenu>
+                        <Submenu name="4">
+                            <template slot="title">
+                                <Icon type="ios-analytics"></Icon>
+                                <span>神奇的css</span>
+                            </template>
+                            <MenuItem name="4-1" to="/css1">css1</MenuItem>
+                            <MenuItem name="4-2" to="/css2">css2</MenuItem>
+                            <MenuItem name="4-3" to="/css3">css3</MenuItem>
+                            <MenuItem name="4-4" to="/css4">css4</MenuItem>
+                            <MenuItem name="4-5" to="/css5">css5</MenuItem>
+                            <MenuItem name="4-6" to="/css6">css6</MenuItem>
+                            <MenuItem name="4-7" to="/css7">css7</MenuItem>
+                            <MenuItem name="4-8" to="/css8">css8</MenuItem>
+                            <MenuItem name="4-9" to="/css9">css9</MenuItem>
+                            <MenuItem name="4-10" to="/css10">css10</MenuItem>
+                            <MenuItem name="4-11" to="/css11">css11</MenuItem>
+                            <MenuItem name="4-12" to="/css12">css12</MenuItem>
                         </Submenu>
 					</Menu>
 				</Sider>
