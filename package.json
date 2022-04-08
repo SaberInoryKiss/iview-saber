@@ -11,7 +11,7 @@
   "dependencies": {
     "@antv/data-set": "^0.10.2",
     "@antv/g2": "^3.5.11",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "core-js": "^3.6.4",
     "echarts": "^4.6.0",
     "ejsexcel": "^3.6.2",
